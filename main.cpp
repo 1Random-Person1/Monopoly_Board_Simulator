@@ -111,24 +111,62 @@ public:
 
         if (headNode == nullptr)
         {
-            headNode->nextNode = tailNode;
-            tailNode->nextNode = playerNode;
-            playerNode ->nextNode = newNode;
+            headNode = newNode;
+            tailNode = newNode;
+            playerNode = newNode;
             newNode->nextNode = headNode;
         } else {
             tailNode->nextNode = newNode;
             tailNode = newNode;
             tailNode->nextNode = headNode;
-            nodeCount++;
-            return true;
         }
+        nodeCount++;
+        return true;
     }
 };
 
-int main()
-{
-    MonopolySpace Go("Go", "Yellow", 0, 0);
-    Go.print();
-    MonopolySpace Space2("Mediterranean Ave", "Brown", 60, 0);
-    Space2.print();
+int main() {
+    srand(static_cast<unsigned>(time(nullptr)));
+    CircularLinkedList<MonopolySpace> board;
+    // -------------------------------
+    // Board Construction Phase
+    // -------------------------------
+    // You decide how to build the board:
+    // - hardcode spaces, load from file, or generate spaces programmatically
+    // The only requirement: never exceed MAX_SPACES and keep the list circular.
+    //
+    // Example (hardcoded) usage:
+    // vector<MonopolySpace> spaces;
+    // spaces.push_back(MonopolySpace("GO","None",0,0));
+    // ...
+    // board.addMany(spaces);
+    //
+    // NOTE: This starter calls addSpace once to show the intended API,
+    // but your final submission should build a meaningful board.
+    board.addSpace(MonopolySpace("GO", "None", 0, 0));
+
+    /*
+    // -------------------------------
+    // Playable Traversal Loop
+    // -------------------------------
+    for (int turn = 1; turn <= 10; turn++) {
+        int roll = rollDice2to12();
+        cout << "\nTurn " << turn << " | Rolled: " << roll << endl;
+        board.movePlayer(roll);
+        cout << "Board view from player (next 5 spaces):" << endl;
+        board.printFromPlayer(5);
+        cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
+    }
+    */
+
+    // -------------------------------
+    // Advanced Feature Demos (students choose path)
+    // -------------------------------
+    // Option A examples:
+    // board.removeByName("Baltic Avenue");
+    // vector<string> brownProps = board.findByColor("Brown");
+    //
+    // Option B example:
+    // board.mirrorBoard();
+    return 0;
 }
