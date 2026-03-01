@@ -104,6 +104,7 @@ public:
 
         if (nodeCount == MAX_SPACES)
         {
+            cout << endl << "ERROR: too many spaces" << endl; //mainly for testing
             return false;
         }
 
@@ -136,20 +137,18 @@ public:
         // - Return number successfully added
         // - Do not corrupt pointers if capacity is exceeded
 
+        int counter = 0;
+
         for (int i = 0; i < values.size(); i++)
         {
-            if (nodeCount == MAX_SPACES)
+            if (!addSpace(values[i]))
             {
-                cout << "Max size" << endl;
                 break;
-            } else
-            {
-                addSpace(values[i]);
             }
-            return i;
 
+            counter++;
         }
-
+        return counter;
     }
 };
 
@@ -166,7 +165,7 @@ int main() {
     // Example (hardcoded) usage:
     vector<MonopolySpace> spaces;
     spaces.push_back(MonopolySpace("GO","None",0,0));
-    spaces.push_back(MonopolySpace("Space 1","Bleu ",1,1));
+    spaces.push_back(MonopolySpace("Space1","None",0,0));
 
     board.addMany(spaces);
     //
