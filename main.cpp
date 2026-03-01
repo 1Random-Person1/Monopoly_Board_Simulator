@@ -3,6 +3,8 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <filesystem>
+#include <bits/locale_facets_nonio.h>
 
 using namespace std;
 static const int MAX_SPACES = 40;
@@ -32,6 +34,9 @@ public:
         if (propertyName == other.propertyName)
         {
             return true;
+        } else
+        {
+            return false;
         }
     }
 
@@ -44,6 +49,7 @@ public:
 // -------------------------------
 // Template Node class (NOT a struct)
 // -------------------------------
+
 template <typename T>
 class Node {
 public:
@@ -95,12 +101,6 @@ public:
     // -------------------------------
 
     bool addSpace(T value) {
-        // TODO:
-        // - If nodeCount == MAX_SPACES return false (do not corrupt list)
-        // - Create new node
-        // - If empty list: head=tail=player=new, new->next=head
-        // - Else: tail->next=new, tail=new, tail->next=head
-        // - nodeCount++
 
         if (nodeCount == MAX_SPACES)
         {
@@ -123,6 +123,34 @@ public:
         nodeCount++;
         return true;
     }
+
+    // -------------------------------
+    // Core B: Add Multiple Spaces at Once
+    // -------------------------------
+
+    int addMany(vector<T> values) {
+
+        // TODO:
+        // - Add sequentially until full
+        // - Stop exactly when you reach MAX_SPACES
+        // - Return number successfully added
+        // - Do not corrupt pointers if capacity is exceeded
+
+        for (int i = 0; i < values.size(); i++)
+        {
+            if (nodeCount == MAX_SPACES)
+            {
+                cout << "Max size" << endl;
+                break;
+            } else
+            {
+                addSpace(values[i]);
+            }
+            return i;
+
+        }
+
+    }
 };
 
 int main() {
@@ -136,14 +164,15 @@ int main() {
     // The only requirement: never exceed MAX_SPACES and keep the list circular.
     //
     // Example (hardcoded) usage:
-    // vector<MonopolySpace> spaces;
-    // spaces.push_back(MonopolySpace("GO","None",0,0));
-    // ...
-    // board.addMany(spaces);
+    vector<MonopolySpace> spaces;
+    spaces.push_back(MonopolySpace("GO","None",0,0));
+    spaces.push_back(MonopolySpace("Space 1","Bleu ",1,1));
+
+    board.addMany(spaces);
     //
     // NOTE: This starter calls addSpace once to show the intended API,
     // but your final submission should build a meaningful board.
-    board.addSpace(MonopolySpace("GO", "None", 0, 0));
+    //board.addSpace(MonopolySpace("GO", "None", 0, 0));
 
     /*
     // -------------------------------
