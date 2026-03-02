@@ -150,12 +150,12 @@ public:
     // -------------------------------
 
     void movePlayer(int steps) {
-        // TODO:
-        // - Move playerNode forward 'steps' times, node-by-node
-        // - Wrap naturally because list is circular
-        // - Detect and track passing GO:
-        // increment passGoCount when a move crosses from tail back to head
-        // - Must handle empty list safely
+
+        if (playerNode == nullptr)
+        {
+            return;
+        }
+
         for (int i = 0; i < steps; i++)
         {
             if (playerNode == tailNode)
