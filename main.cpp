@@ -160,6 +160,7 @@ public:
         {
             if (playerNode == tailNode)
             {
+                playerNode = playerNode->nextNode;
                 passGoCount++;
             } else
             {
