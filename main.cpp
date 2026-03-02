@@ -186,16 +186,29 @@ public:
 
         for (int i = 0; i < count; i++)
         {
-            cout << playerNode << endl;
-        }
+            if (playerNode == nullptr)
+            {
+                return;
+            } else
+            {
+                cout << playerNode << endl;
+            }
 
-        cout << "printFromPlayer unwritten" << endl;
+        }
     }
+
+
     // Optional helper: print full board once (one full cycle)
     void printBoardOnce() {
         // TODO:
         // - Traverse exactly one full cycle and print each node
-        cout << "printBoardOnce unwritten" << endl;
+
+        while (playerNode->nextNode)
+        {
+            cout << playerNode << endl;
+
+        }
+
     }
 
 };
@@ -231,6 +244,9 @@ int main() {
     spaces.push_back(MonopolySpace("Space10","None",0,0));
 
     board.addMany(spaces);
+
+    board.printBoardOnce();
+
     //
     // NOTE: This starter calls addSpace once to show the intended API,
     // but your final submission should build a meaningful board.
