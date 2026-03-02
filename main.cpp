@@ -183,6 +183,12 @@ public:
         // - Must not infinite loop
         // - Must handle empty list
         // - Output must be deterministic and readable
+
+        for (int i = 0; i < count; i++)
+        {
+            cout << playerNode << endl;
+        }
+
         cout << "printFromPlayer unwritten" << endl;
     }
     // Optional helper: print full board once (one full cycle)
