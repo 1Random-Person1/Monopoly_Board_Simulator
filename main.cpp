@@ -131,12 +131,6 @@ public:
 
     int addMany(vector<T> values) {
 
-        // TODO:
-        // - Add sequentially until full
-        // - Stop exactly when you reach MAX_SPACES
-        // - Return number successfully added
-        // - Do not corrupt pointers if capacity is exceeded
-
         int counter = 0;
 
         for (int i = 0; i < values.size(); i++)
@@ -150,7 +144,61 @@ public:
         }
         return counter;
     }
+
+    // -------------------------------
+    // Core C: Traversal-Based Player Movement
+    // -------------------------------
+
+    void movePlayer(int steps) {
+        // TODO:
+        // - Move playerNode forward 'steps' times, node-by-node
+        // - Wrap naturally because list is circular
+        // - Detect and track passing GO:
+        // increment passGoCount when a move crosses from tail back to head
+        // - Must handle empty list safely
+        for (int i = 0; i < steps; i++)
+        {
+            if (playerNode == tailNode)
+            {
+                passGoCount++;
+            } else
+            {
+                playerNode = playerNode->nextNode;
+            }
+
+        }
+    }
+    int getPassGoCount() {
+        return passGoCount;
+    }
+
+    // -------------------------------
+    // Core D: Controlled Board Display
+    // -------------------------------
+
+    void printFromPlayer(int count) {
+        // TODO:
+        // - Print exactly 'count' nodes starting from playerNode
+        // - Must not infinite loop
+        // - Must handle empty list
+        // - Output must be deterministic and readable
+        cout << "printFromPlayer unwritten" << endl;
+    }
+    // Optional helper: print full board once (one full cycle)
+    void printBoardOnce() {
+        // TODO:
+        // - Traverse exactly one full cycle and print each node
+        cout << "printBoardOnce unwritten" << endl;
+    }
+
 };
+
+// -------------------------------
+// Main: playable loop demo
+// -------------------------------
+int rollDice2to12() {
+    return (rand() % 6 + 1) + (rand() % 6 + 1);
+}
 
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
@@ -165,7 +213,15 @@ int main() {
     // Example (hardcoded) usage:
     vector<MonopolySpace> spaces;
     spaces.push_back(MonopolySpace("GO","None",0,0));
-    spaces.push_back(MonopolySpace("Space1","None",0,0));
+    spaces.push_back(MonopolySpace("Space2","None",0,0));
+    spaces.push_back(MonopolySpace("Space3","None",0,0));
+    spaces.push_back(MonopolySpace("Space4","None",0,0));
+    spaces.push_back(MonopolySpace("Space5","None",0,0));
+    spaces.push_back(MonopolySpace("Space6","None",0,0));
+    spaces.push_back(MonopolySpace("Space7","None",0,0));
+    spaces.push_back(MonopolySpace("Space8","None",0,0));
+    spaces.push_back(MonopolySpace("Space9","None",0,0));
+    spaces.push_back(MonopolySpace("Space10","None",0,0));
 
     board.addMany(spaces);
     //
@@ -173,7 +229,7 @@ int main() {
     // but your final submission should build a meaningful board.
     //board.addSpace(MonopolySpace("GO", "None", 0, 0));
 
-    /*
+
     // -------------------------------
     // Playable Traversal Loop
     // -------------------------------
@@ -185,7 +241,7 @@ int main() {
         board.printFromPlayer(5);
         cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
     }
-    */
+
 
     // -------------------------------
     // Advanced Feature Demos (students choose path)
