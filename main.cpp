@@ -105,7 +105,7 @@ public:
 
         if (nodeCount == MAX_SPACES)
         {
-            cout << endl << "ERROR: too many spaces" << endl; //mainly for testing
+            cout << endl << "ERROR: too many spaces" << endl; //testing
             return false;
         }
 
@@ -221,19 +221,38 @@ public:
     // -------------------------------
     // Edge-case helper: countSpaces O(n)
     // -------------------------------
+
     int countSpaces() {
         // TODO:
         // - Must be O(n), traverse exactly once with correct stop condition
         // - Do NOT rely on nodeCount for this method
 
+        int counter = 0;
 
-        cout << "countSpaces unwritten" << endl;
-        return 0;
+        if (headNode == nullptr)
+        {
+            return 0;
+        }
+
+        tailNode->nextNode = nullptr;
+        Node<T>* temp = headNode;
+
+        while (temp != nullptr)
+        {
+            temp = temp->nextNode;
+            counter++;
+        }
+
+        cout << endl;
+        cout << "Number of spaces = " << counter << endl; //testing
+        return counter;
+
     }
 
     // -------------------------------
     // Cleanup
     // -------------------------------
+
     void clear() {
         // TODO:
         // - Safely delete all nodes
@@ -324,7 +343,7 @@ int main() {
 
     board.printBoardOnce();
 
-    //board.countSpaces();
+    board.countSpaces();
 
     board.clear();
 
