@@ -230,20 +230,29 @@ public:
         // - Tip: if tailNode exists, break the cycle first: tailNode->nextNode = nullptr
         // - Then delete like a normal singly linked list
 
+        if (headNode == nullptr)
+        {
+            return;
+        }
+
         if (tailNode->nextNode == headNode)
         {
             tailNode->nextNode = nullptr;
-            tailNode = nullptr;
         }
 
         Node<T>* temp = headNode;
 
-        while (temp->nextNode)
+        while (temp->nextNode != nullptr)
         {
             headNode = headNode->nextNode;
             delete temp;
             temp = headNode;
         }
+
+        headNode = nullptr;
+        tailNode = nullptr;
+        playerNode = nullptr;
+
     }
 
 };
