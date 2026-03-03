@@ -180,14 +180,15 @@ public:
 
     void printFromPlayer(int count) {
 
+        if (playerNode == nullptr)
+        {
+            return;
+        }
+
         Node<T>* temp = headNode;
 
         for (int i = 0; i < count; i++)
         {
-            if (playerNode == nullptr)
-            {
-                return;
-            }
 
             temp->data.print();
             temp = temp->nextNode;
@@ -198,7 +199,16 @@ public:
     // Optional helper: print full board once (one full cycle)
     void printBoardOnce() {
 
+        if (headNode == nullptr)
+        {
+            cout << endl;
+            cout << "nothing" << endl; //testing
+            return;
+        }
+
         Node<T>* temp = headNode;
+
+        cout << endl;
 
         for (int i = 0; i < nodeCount; i++)
         {
@@ -235,14 +245,14 @@ public:
             return;
         }
 
-        if (tailNode->nextNode == headNode)
+        if (tailNode != nullptr)
         {
             tailNode->nextNode = nullptr;
         }
 
         Node<T>* temp = headNode;
 
-        while (temp->nextNode != nullptr)
+        while (temp != nullptr)
         {
             headNode = headNode->nextNode;
             delete temp;
