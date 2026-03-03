@@ -96,6 +96,7 @@ public:
     // - enforce MAX_SPACES
     // - maintain circular integrity
     // -------------------------------
+
     // -------------------------------
     // Core A: Add a Space with Capacity Enforcement
     // -------------------------------
@@ -207,11 +208,50 @@ public:
 
     }
 
+    // -------------------------------
+    // Edge-case helper: countSpaces O(n)
+    // -------------------------------
+    int countSpaces() {
+        // TODO:
+        // - Must be O(n), traverse exactly once with correct stop condition
+        // - Do NOT rely on nodeCount for this method
+
+
+        cout << "countSpaces unwritten" << endl;
+        return 0;
+    }
+
+    // -------------------------------
+    // Cleanup
+    // -------------------------------
+    void clear() {
+        // TODO:
+        // - Safely delete all nodes
+        // - Tip: if tailNode exists, break the cycle first: tailNode->nextNode = nullptr
+        // - Then delete like a normal singly linked list
+
+        if (tailNode->nextNode == headNode)
+        {
+            tailNode->nextNode = nullptr;
+            tailNode = nullptr;
+        }
+
+        Node<T>* temp = headNode;
+
+        while (temp->nextNode)
+        {
+            headNode = headNode->nextNode;
+            delete temp;
+            temp = headNode;
+        }
+    }
+
 };
 
 // -------------------------------
 // Main: playable loop demo
 // -------------------------------
+
 int rollDice2to12() {
     return (rand() % 6 + 1) + (rand() % 6 + 1);
 }
@@ -219,13 +259,16 @@ int rollDice2to12() {
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
     CircularLinkedList<MonopolySpace> board;
+
     // -------------------------------
     // Board Construction Phase
     // -------------------------------
+
     // You decide how to build the board:
     // - hardcode spaces, load from file, or generate spaces programmatically
     // The only requirement: never exceed MAX_SPACES and keep the list circular.
     //
+
     // Example (hardcoded) usage:
     vector<MonopolySpace> spaces;
     spaces.push_back(MonopolySpace("GO","None",0,0));
@@ -241,8 +284,6 @@ int main() {
 
     board.addMany(spaces);
 
-    board.printBoardOnce();
-
     //
     // NOTE: This starter calls addSpace once to show the intended API,
     // but your final submission should build a meaningful board.
@@ -252,6 +293,7 @@ int main() {
     // -------------------------------
     // Playable Traversal Loop
     // -------------------------------
+
     for (int turn = 1; turn <= 10; turn++) {
         int roll = rollDice2to12();
         cout << "\nTurn " << turn << " | Rolled: " << roll << endl;
@@ -261,6 +303,13 @@ int main() {
         cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
     }
 
+    board.printBoardOnce();
+
+    //board.countSpaces();
+
+    board.clear();
+
+    board.printBoardOnce();
 
     // -------------------------------
     // Advanced Feature Demos (students choose path)
