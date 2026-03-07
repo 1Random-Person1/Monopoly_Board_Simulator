@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <filesystem>
+#include <fstream>
 #include <bits/locale_facets_nonio.h>
 
 using namespace std;
@@ -72,7 +73,6 @@ class CircularLinkedList
 private:
     Node<T>* headNode;
     Node<T>* tailNode;
-    // player cursor for traversal-based gameplay
     Node<T>* playerNode;
     int nodeCount;
     int passGoCount;
@@ -301,7 +301,6 @@ int main() {
     // -------------------------------
     // Board Construction Phase
     // -------------------------------
-
     // You decide how to build the board:
     // - hardcode spaces, load from file, or generate spaces programmatically
     // The only requirement: never exceed MAX_SPACES and keep the list circular.
@@ -310,15 +309,46 @@ int main() {
     // Example (hardcoded) usage:
     vector<MonopolySpace> spaces;
     spaces.push_back(MonopolySpace("GO","None",0,0));
-    spaces.push_back(MonopolySpace("Space2","None",0,0));
-    spaces.push_back(MonopolySpace("Space3","None",0,0));
-    spaces.push_back(MonopolySpace("Space4","None",0,0));
-    spaces.push_back(MonopolySpace("Space5","None",0,0));
-    spaces.push_back(MonopolySpace("Space6","None",0,0));
-    spaces.push_back(MonopolySpace("Space7","None",0,0));
-    spaces.push_back(MonopolySpace("Space8","None",0,0));
-    spaces.push_back(MonopolySpace("Space9","None",0,0));
-    spaces.push_back(MonopolySpace("Space10","None",0,0));
+    spaces.push_back(MonopolySpace("Mediterranean Avenue","Brown",60,0));
+    spaces.push_back(MonopolySpace("Community Chest","None",0,0));
+    spaces.push_back(MonopolySpace("Baltic Avenue","Brown",60,0));
+    spaces.push_back(MonopolySpace("Income Tax","None",0,200));
+    spaces.push_back(MonopolySpace("Reading Railroad","None",200,0));
+    spaces.push_back(MonopolySpace("Oriental Avenue","Light Blue",100,0));
+    spaces.push_back(MonopolySpace("Chance","None",0,0));
+    spaces.push_back(MonopolySpace("Vermont Avenue","Light Blue",100,0));
+    spaces.push_back(MonopolySpace("Connecticut Avenue","Light Blue",120,0));
+    spaces.push_back(MonopolySpace("Jail","None",0,0));
+    spaces.push_back(MonopolySpace("St. Charles Place","Pink",0,0));
+    spaces.push_back(MonopolySpace("Electric Company","None",150,0));
+    spaces.push_back(MonopolySpace("States Avenue","Pink",140,0));
+    spaces.push_back(MonopolySpace("Virginia Avenue","Pink",160,0));
+    spaces.push_back(MonopolySpace("Pennsylvania Railroad","None",200,0));
+    spaces.push_back(MonopolySpace("St. James Place","Orange",180,0));
+    spaces.push_back(MonopolySpace("Community Chest","",0,0));
+    spaces.push_back(MonopolySpace("Tennessee Avenue","Orange",180,0));
+    spaces.push_back(MonopolySpace("New York Avenue","Orange",200,0));
+    spaces.push_back(MonopolySpace("Free Parking","None",0,0));
+    spaces.push_back(MonopolySpace("Kentucky Avenue","Red",220,0));
+    spaces.push_back(MonopolySpace("Chance","None",0,0));
+    spaces.push_back(MonopolySpace("Indiana Avenue","Red",220,0));
+    spaces.push_back(MonopolySpace("Illinois Avenue","Red",240,0));
+    spaces.push_back(MonopolySpace("B. & O. Railroad","",200,0));
+    spaces.push_back(MonopolySpace("Atlantic Avenue","Yellow",260,0));
+    spaces.push_back(MonopolySpace("Ventnor Avenue","Yellow",260,0));
+    spaces.push_back(MonopolySpace("Water Works","None",150,0));
+    spaces.push_back(MonopolySpace("Marvin Gardens","Yellow",280,0));
+    spaces.push_back(MonopolySpace("Go to Jail","None",0,0));
+    spaces.push_back(MonopolySpace("Pacific Avenue","Green",300,0));
+    spaces.push_back(MonopolySpace("North Carolina Avenue","Green",300,0));
+    spaces.push_back(MonopolySpace("Community Chest","None",0,0));
+    spaces.push_back(MonopolySpace("Pennsylvania Avenue","Green",320,0));
+    spaces.push_back(MonopolySpace("Short Line","None",200,0));
+    spaces.push_back(MonopolySpace("Chance","None",0,0));
+    spaces.push_back(MonopolySpace("Park Place","Dark Blue",0,0));
+    spaces.push_back(MonopolySpace("Luxury Tax","None",0,350));
+    spaces.push_back(MonopolySpace("Boardwalk","None",400,0));
+
 
     board.addMany(spaces);
 
