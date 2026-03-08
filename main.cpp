@@ -185,7 +185,7 @@ public:
             return;
         }
 
-        Node<T>* temp = headNode;
+        Node<T>* temp = playerNode;
 
         for (int i = 0; i < count; i++)
         {
