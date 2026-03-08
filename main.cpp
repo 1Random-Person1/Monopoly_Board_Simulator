@@ -62,11 +62,6 @@ public:
     }
 };
 
-// -------------------------------
-// Template Circular Linked List class
-// Spring 2026 version: traversable board
-// -------------------------------
-
 template <typename T>
 class CircularLinkedList
 {
@@ -85,17 +80,6 @@ public:
         nodeCount = 0;
         passGoCount = 0;
     }
-
-    // -------------------------------
-    // Board Construction Policy (Reminder)
-    // -------------------------------
-    // Spaces are added during board construction BEFORE gameplay.
-    // You choose how to construct the board:
-    // - hardcode spaces, read from file, or generate programmatically
-    // The only non-negotiable requirement:
-    // - enforce MAX_SPACES
-    // - maintain circular integrity
-    // -------------------------------
 
     // -------------------------------
     // Core A: Add a Space with Capacity Enforcement
@@ -202,7 +186,7 @@ public:
         if (headNode == nullptr)
         {
             cout << endl;
-            cout << "nothing" << endl; //testing
+            cout << "Empty board" << endl; //testing
             return;
         }
 
@@ -219,13 +203,55 @@ public:
     }
 
     // -------------------------------
+    // Advanced Option B (Level 2): Mirror the Board (Circular Reversal)
+    // -------------------------------
+
+    void mirrorBoard() {
+        // TODO:
+        // - Reverse the direction of the circular list by reversing next pointers
+        // - Preserve circular structure
+        // - Correctly handle empty list and single-node list
+        // - Player cursor must remain on the same logical space after reversal
+
+        if (headNode == nullptr || headNode->nextNode == headNode)
+        {
+            return;
+        }
+
+        if (tailNode != nullptr)
+        {
+            tailNode->nextNode = nullptr;
+        }
+
+        Node<T>* current = headNode;
+        Node<T>* next = nullptr;
+        Node<T>* previous = nullptr;
+
+        for (int i = 0; i < nodeCount; i++)
+        {
+            next = current->nextNode;
+            previous = current;
+            current = current->nextNode;
+
+
+
+        }
+
+        [current = 1][2][3][4]
+
+        [previous = 1][current/next = 2][3][4]
+        [2][1][3][4]
+        [2][3][1][4]
+        [2][3][4][1]
+
+
+    }
+
+    // -------------------------------
     // Edge-case helper: countSpaces O(n)
     // -------------------------------
 
     int countSpaces() {
-        // TODO:
-        // - Must be O(n), traverse exactly once with correct stop condition
-        // - Do NOT rely on nodeCount for this method
 
         int counter = 0;
 
@@ -254,10 +280,6 @@ public:
     // -------------------------------
 
     void clear() {
-        // TODO:
-        // - Safely delete all nodes
-        // - Tip: if tailNode exists, break the cycle first: tailNode->nextNode = nullptr
-        // - Then delete like a normal singly linked list
 
         if (headNode == nullptr)
         {
@@ -306,12 +328,13 @@ int main() {
     // The only requirement: never exceed MAX_SPACES and keep the list circular.
     //
 
-    // Example (hardcoded) usage:
     vector<MonopolySpace> spaces;
     spaces.push_back(MonopolySpace("GO","None",0,0));
     spaces.push_back(MonopolySpace("Mediterranean Avenue","Brown",60,0));
     spaces.push_back(MonopolySpace("Community Chest","None",0,0));
     spaces.push_back(MonopolySpace("Baltic Avenue","Brown",60,0));
+
+    /*
     spaces.push_back(MonopolySpace("Income Tax","None",0,200));
     spaces.push_back(MonopolySpace("Reading Railroad","None",200,0));
     spaces.push_back(MonopolySpace("Oriental Avenue","Light Blue",100,0));
@@ -349,12 +372,12 @@ int main() {
     spaces.push_back(MonopolySpace("Luxury Tax","None",0,350));
     spaces.push_back(MonopolySpace("Boardwalk","None",400,0));
 
+    spaces.push_back(MonopolySpace("Boardwalk","None",400,0));
+    */
+
 
     board.addMany(spaces);
 
-    //
-    // NOTE: This starter calls addSpace once to show the intended API,
-    // but your final submission should build a meaningful board.
     //board.addSpace(MonopolySpace("GO", "None", 0, 0));
 
 
@@ -371,22 +394,15 @@ int main() {
         cout << "Times passed GO so far: " << board.getPassGoCount() << endl;
     }
 
+    board.countSpaces();
+
     board.printBoardOnce();
 
-    board.countSpaces();
+    board.mirrorBoard();
 
     board.clear();
 
     board.printBoardOnce();
 
-    // -------------------------------
-    // Advanced Feature Demos (students choose path)
-    // -------------------------------
-    // Option A examples:
-    // board.removeByName("Baltic Avenue");
-    // vector<string> brownProps = board.findByColor("Brown");
-    //
-    // Option B example:
-    // board.mirrorBoard();
     return 0;
 }
