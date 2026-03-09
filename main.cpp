@@ -207,20 +207,10 @@ public:
     // -------------------------------
 
     void mirrorBoard() {
-        // TODO:
-        // - Reverse the direction of the circular list by reversing next pointers
-        // - Preserve circular structure
-        // - Correctly handle empty list and single-node list
-        // - Player cursor must remain on the same logical space after reversal
 
         if (headNode == nullptr || headNode->nextNode == headNode)
         {
             return;
-        }
-
-        if (tailNode != nullptr)
-        {
-            tailNode->nextNode = nullptr;
         }
 
         Node<T>* current = headNode;
@@ -230,20 +220,14 @@ public:
         for (int i = 0; i < nodeCount; i++)
         {
             next = current->nextNode;
+            current->nextNode = previous;
             previous = current;
-            current = current->nextNode;
-
-
-
+            current = next;
         }
 
-        [current = 1][2][3][4]
-
-        [previous = 1][current/next = 2][3][4]
-        [2][1][3][4]
-        [2][3][1][4]
-        [2][3][4][1]
-
+        tailNode = headNode;
+        headNode = previous;
+        tailNode->nextNode = headNode;
 
     }
 
@@ -320,21 +304,11 @@ int main() {
     srand(static_cast<unsigned>(time(nullptr)));
     CircularLinkedList<MonopolySpace> board;
 
-    // -------------------------------
-    // Board Construction Phase
-    // -------------------------------
-    // You decide how to build the board:
-    // - hardcode spaces, load from file, or generate spaces programmatically
-    // The only requirement: never exceed MAX_SPACES and keep the list circular.
-    //
-
     vector<MonopolySpace> spaces;
     spaces.push_back(MonopolySpace("GO","None",0,0));
     spaces.push_back(MonopolySpace("Mediterranean Avenue","Brown",60,0));
     spaces.push_back(MonopolySpace("Community Chest","None",0,0));
     spaces.push_back(MonopolySpace("Baltic Avenue","Brown",60,0));
-
-    /*
     spaces.push_back(MonopolySpace("Income Tax","None",0,200));
     spaces.push_back(MonopolySpace("Reading Railroad","None",200,0));
     spaces.push_back(MonopolySpace("Oriental Avenue","Light Blue",100,0));
@@ -372,14 +346,11 @@ int main() {
     spaces.push_back(MonopolySpace("Luxury Tax","None",0,350));
     spaces.push_back(MonopolySpace("Boardwalk","None",400,0));
 
-    spaces.push_back(MonopolySpace("Boardwalk","None",400,0));
-    */
-
+    spaces.push_back(MonopolySpace("Boardwalk","None",400,0)); //testing
 
     board.addMany(spaces);
 
     //board.addSpace(MonopolySpace("GO", "None", 0, 0));
-
 
     // -------------------------------
     // Playable Traversal Loop
@@ -399,6 +370,8 @@ int main() {
     board.printBoardOnce();
 
     board.mirrorBoard();
+
+    board.printBoardOnce();
 
     board.clear();
 
